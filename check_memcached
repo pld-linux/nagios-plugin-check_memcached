@@ -11,8 +11,7 @@
 
 
 use strict;
-# you will need to fix this!
-use lib "/opt/nagios/plugins";
+use lib '@plugindir@';
 use Cache::Memcached;
 use Getopt::Long;
 
