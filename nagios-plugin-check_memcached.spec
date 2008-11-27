@@ -1,13 +1,14 @@
 %define		plugin	check_memcached
+%include	/usr/lib/rpm/macros.perl
 Summary:	MemCached health check for Nagios
 Name:		nagios-plugin-%{plugin}
 Version:	1.1
 Release:	0.1
 License:	BSD
 Group:		Networking
-Source0:	http://zilbo.com/plugins/check_memcached
-# Source0-md5:	f53bb57eba0510727b71e5be81fbbceb
+Source0:	check_memcached
 URL:		http://zilbo.com/
+BuildRequires:	rpm-perlprov >= 4.1-13
 Requires:	nagios-core
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -20,7 +21,7 @@ Nagios plugin to check if memcached is up and running.
 
 %prep
 %setup -qcT
-%{__sed} %{SOURCE0} -i -e 's,@plugindir@,%{_plugindir},' > %{plugin}
+%{__sed} %{SOURCE0} -e 's,@plugindir@,%{plugindir},' > %{plugin}
 
 cat > nagios.cfg <<'EOF'
 # Usage:
