@@ -1,0 +1,19 @@
+--- Nagios-Plugins-Memcached-0.02/bin/check_memcached~	2007-07-18 06:32:57.000000000 +0300
++++ Nagios-Plugins-Memcached-0.02/bin/check_memcached	2009-02-09 18:10:51.773690581 +0200
+@@ -1,14 +1,8 @@
+ #!/usr/bin/perl
+-
+ use strict;
+-use warnings;
+-
+-use FindBin;
+-use lib "$FindBin::Bin/../lib";
+-
+-use Nagios::Plugins::Memcached;
++use Nagios::Plugins::Memcached;
+ 
+-my $np = Nagios::Plugins::Memcached->new;
++my $np = Nagios::Plugins::Memcached->new;
+ $np->run;
+ 
+ 1;
