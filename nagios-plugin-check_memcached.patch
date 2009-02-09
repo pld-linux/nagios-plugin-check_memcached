@@ -10,10 +10,59 @@
 -use lib "$FindBin::Bin/../lib";
 -
 -use Nagios::Plugins::Memcached;
-+use Nagios::Plugins::Memcached;
++use Nagios::Plugin::Memcached;
  
 -my $np = Nagios::Plugins::Memcached->new;
-+my $np = Nagios::Plugins::Memcached->new;
++my $np = Nagios::Plugin::Memcached->new;
  $np->run;
  
  1;
+--- Nagios-Plugins-Memcached-0.02/lib/Nagios/Plugins/Memcached.pm~	2007-12-11 10:00:09.000000000 +0200
++++ Nagios-Plugins-Memcached-0.02/lib/Nagios/Plugins/Memcached.pm	2009-02-09 18:21:04.690303306 +0200
+@@ -1,4 +1,4 @@
+-package Nagios::Plugins::Memcached;
++package Nagios::Plugin::Memcached;
+ 
+ use strict;
+ use warnings;
+@@ -12,7 +12,7 @@
+ 
+ =head1 NAME
+ 
+-Nagios::Plugins::Memcached - Nagios plugin to observe memcached.
++Nagios::Plugin::Memcached - Nagios plugin to observe memcached.
+ 
+ =head1 VERSION
+ 
+@@ -24,9 +24,9 @@
+ 
+ =head1 SYNOPSIS
+ 
+-  use Nagios::Plugins::Memcached;
++  use Nagios::Plugin::Memcached;
+ 
+-  my $np = Nagios::Plugins::Memcached->new;
++  my $np = Nagios::Plugin::Memcached->new;
+   $np->run;
+ 
+ =head1 DESCRIPTION
+@@ -453,7 +453,7 @@
+ 
+ =cut
+ 
+-1;    # End of Nagios::Plugins::Memcached
++1;    # End of Nagios::Plugin::Memcached
+ 
+ __END__
+ 
+--- Nagios-Plugins-Memcached-0.02/Makefile.PL~	2007-07-18 06:32:57.000000000 +0300
++++ Nagios-Plugins-Memcached-0.02/Makefile.PL	2009-02-09 18:23:52.133616492 +0200
+@@ -2,7 +2,7 @@
+ 
+ name('Nagios-Plugins-Memcached');
+ author('Toru Yamaguchi <zigorou@cpan.org>');
+-version_from('lib/Nagios/Plugins/Memcached.pm');
++version_from('lib/Nagios/Plugin/Memcached.pm');
+ abstract('Nagios plugin to observe memcached');
+ license('perl');
+ 

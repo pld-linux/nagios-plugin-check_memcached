@@ -5,7 +5,7 @@
 Summary:	Nagios plugin to observe memcached
 Name:		nagios-plugin-%{plugin}
 Version:	0.02
-Release:	0.1
+Release:	0.2
 Epoch:		1
 # same as perl
 License:	GPL v1+ or Artistic
@@ -35,6 +35,7 @@ Nagios plugin to check if memcached is up and running.
 %prep
 %setup -q -n Nagios-Plugins-Memcached-%{version}
 %patch0 -p1
+mv lib/Nagios/Plugin{s,}
 
 cat > nagios.cfg <<'EOF'
 # NOTE: This plugin can execute with all threshold options together.
@@ -69,6 +70,7 @@ EOF
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} pure_install \
+	INSTALLSCRIPT=%{plugindir} \
 	DESTDIR=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{plugindir}}
@@ -82,8 +84,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{plugin}.cfg
-%attr(755,root,root) %{_bindir}/check_memcached
-%{_mandir}/man3/Nagios::Plugins::Memcached.3pm*
-# XXX -- use singular base dir
-%dir %{perl_vendorlib}/Nagios/Plugins
-%{perl_vendorlib}/Nagios/Plugins/Memcached.pm
+%attr(755,root,root) %{plugindir}/check_memcached
+%{_mandir}/man3/Nagios::Plugin::Memcached.3pm*
+%{perl_vendorlib}/Nagios/Plugin/Memcached.pm
