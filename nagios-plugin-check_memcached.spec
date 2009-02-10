@@ -1,11 +1,9 @@
-# TODO
-# - package into Nagios/Plugin dir
 %define		plugin	check_memcached
 %include	/usr/lib/rpm/macros.perl
 Summary:	Nagios plugin to observe memcached
 Name:		nagios-plugin-%{plugin}
 Version:	0.02
-Release:	0.2
+Release:	1
 Epoch:		1
 # same as perl
 License:	GPL v1+ or Artistic
