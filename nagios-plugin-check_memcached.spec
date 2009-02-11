@@ -1,3 +1,8 @@
+#
+# Conditional build:
+%bcond_without	autodeps	# don't BR packages needed only for resolving deps
+%bcond_without	tests	# do not perform "make test"
+#
 %define		plugin	check_memcached
 %include	/usr/lib/rpm/macros.perl
 Summary:	Nagios plugin to observe memcached
@@ -11,14 +16,15 @@ Group:		Networking
 Source0:	http://www.cpan.org/modules/by-module/Nagios/Nagios-Plugins-Memcached-%{version}.tar.gz
 # Source0-md5:	99154aa60b099a2563f8773f95fd0646
 URL:		http://search.cpan.org/dist/Nagios-Plugins-Memcached/
-BuildRequires:	perl-Nagios-Plugin
+#BuildRequires:	perl-Nagios-Plugin
 Patch0:		%{name}.patch
-BuildRequires:	perl-Cache-Memcached
-BuildRequires:	perl-Carp-Clan
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
+%if %{with autodeps} || %{with tests}
+#BuildRequires:	perl-Cache-Memcached
+#BuildRequires:	perl-Carp-Clan
+%endif
 Requires:	nagios-core
-Requires:	perl-Cache-Memcached
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -57,6 +63,7 @@ EOF
 
 %build
 %{__perl} Makefile.PL \
+	--skipdeps \
 	INSTALLDIRS=vendor
 %{__make}
 
