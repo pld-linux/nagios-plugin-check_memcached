@@ -3,7 +3,7 @@
 Summary:	Nagios plugin to observe memcached
 Name:		nagios-plugin-%{plugin}
 Version:	0.02
-Release:	1
+Release:	2
 Epoch:		1
 # same as perl
 License:	GPL v1+ or Artistic
@@ -13,13 +13,11 @@ Source0:	http://www.cpan.org/modules/by-module/Nagios/Nagios-Plugins-Memcached-%
 URL:		http://search.cpan.org/dist/Nagios-Plugins-Memcached/
 BuildRequires:	perl-Nagios-Plugin
 Patch0:		%{name}.patch
+BuildRequires:	perl-Cache-Memcached
+BuildRequires:	perl-Carp-Clan
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
 Requires:	nagios-core
-%if %{with tests}
-BuildRequires:	perl-Cache-Memcached
-BuildRequires:	perl-Carp-Clan
-%endif
 Requires:	perl-Cache-Memcached
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
