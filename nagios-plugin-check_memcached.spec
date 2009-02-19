@@ -15,14 +15,14 @@ License:	GPL v1+ or Artistic
 Group:		Networking
 Source0:	http://www.cpan.org/modules/by-module/Nagios/Nagios-Plugins-Memcached-%{version}.tar.gz
 # Source0-md5:	99154aa60b099a2563f8773f95fd0646
+Patch0:		%{name}.patch
 URL:		http://search.cpan.org/dist/Nagios-Plugins-Memcached/
 #BuildRequires:	perl-Nagios-Plugin
-Patch0:		%{name}.patch
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
 %if %{with autodeps} || %{with tests}
-#BuildRequires:	perl-Cache-Memcached
-#BuildRequires:	perl-Carp-Clan
+BuildRequires:	perl-Cache-Memcached
+BuildRequires:	perl-Carp-Clan
 %endif
 Requires:	nagios-core
 BuildArch:	noarch
