@@ -8,7 +8,7 @@
 Summary:	Nagios plugin to observe memcached
 Name:		nagios-plugin-%{plugin}
 Version:	0.02
-Release:	2
+Release:	3
 Epoch:		1
 # same as perl
 License:	GPL v1+ or Artistic
@@ -17,7 +17,7 @@ Source0:	http://www.cpan.org/modules/by-module/Nagios/Nagios-Plugins-Memcached-%
 # Source0-md5:	99154aa60b099a2563f8773f95fd0646
 Patch0:		%{name}.patch
 URL:		http://search.cpan.org/dist/Nagios-Plugins-Memcached/
-#BuildRequires:	perl-Nagios-Plugin
+BuildRequires:	perl-Nagios-Plugin
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
 %if %{with autodeps} || %{with tests}
@@ -58,6 +58,22 @@ define command {
 define command {
 	command_name    %{plugin}_hit
 	command_line    %{plugindir}/%{plugin} -H $HOSTADDRESS$ --hit-warning 40 --size-critical 20
+}
+
+## generic memcached service, you need to define check_command from one of the above
+define service {
+	register                0
+	use                     generic-service
+	name                    memcached
+
+	check_period            24x7
+	normal_check_interval   5
+	retry_check_interval    2
+	max_check_attempts      3
+
+	notification_interval   15
+	notification_period     24x7
+	notification_options    w,u,c,r
 }
 EOF
 
