@@ -8,13 +8,14 @@
 Summary:	Nagios plugin to observe memcached
 Name:		nagios-plugin-%{plugin}
 Version:	0.02
-Release:	3
+Release:	4
 Epoch:		1
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Networking
 Source0:	http://www.cpan.org/modules/by-module/Nagios/Nagios-Plugins-Memcached-%{version}.tar.gz
 # Source0-md5:	99154aa60b099a2563f8773f95fd0646
+Source1:	%{plugin}.cfg
 Patch0:		%{name}.patch
 URL:		http://search.cpan.org/dist/Nagios-Plugins-Memcached/
 BuildRequires:	perl-Nagios-Plugin
@@ -39,44 +40,6 @@ Nagios plugin to check if memcached is up and running.
 %patch0 -p1
 mv lib/Nagios/Plugin{s,}
 
-cat > nagios.cfg <<'EOF'
-# NOTE: This plugin can execute with all threshold options together.
-
-### check response time(msec) for memcached
-define command {
-	command_name    %{plugin}_response
-	command_line    %{plugindir}/%{plugin} -H $HOSTADDRESS$ -w 3 -c 5
-}
-
-### check cache size ratio(bytes/limit_maxbytes[%]) for memcached
-define command {
-	command_name    %{plugin}_size
-	command_line    %{plugindir}/%{plugin} -H $HOSTADDRESS$ --size-warning 60 --size-critical 80
-}
-
-### check cache hit ratio(get_hits/cmd_get[%]) for memcached
-define command {
-	command_name    %{plugin}_hit
-	command_line    %{plugindir}/%{plugin} -H $HOSTADDRESS$ --hit-warning 40 --size-critical 20
-}
-
-## generic memcached service, you need to define check_command from one of the above
-define service {
-	register                0
-	use                     generic-service
-	name                    memcached
-
-	check_period            24x7
-	normal_check_interval   5
-	retry_check_interval    2
-	max_check_attempts      3
-
-	notification_interval   15
-	notification_period     24x7
-	notification_options    w,u,c,r
-}
-EOF
-
 %build
 %{__perl} Makefile.PL \
 	--skipdeps \
@@ -93,7 +56,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{plugindir}}
-cp -a nagios.cfg $RPM_BUILD_ROOT%{_sysconfdir}/%{plugin}.cfg
+cp -a %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/%{plugin}.cfg
 
 rm -f $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Nagios/Plugins/Memcached/.packlist
 
