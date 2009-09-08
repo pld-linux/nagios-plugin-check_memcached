@@ -8,7 +8,7 @@
 Summary:	Nagios plugin to observe memcached
 Name:		nagios-plugin-%{plugin}
 Version:	0.02
-Release:	4
+Release:	5
 Epoch:		1
 # same as perl
 License:	GPL v1+ or Artistic
