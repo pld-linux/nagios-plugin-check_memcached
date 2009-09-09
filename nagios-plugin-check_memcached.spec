@@ -8,7 +8,7 @@
 Summary:	Nagios plugin to observe memcached
 Name:		nagios-plugin-%{plugin}
 Version:	0.02
-Release:	6
+Release:	7
 Epoch:		1
 # same as perl
 License:	GPL v1+ or Artistic
@@ -56,7 +56,7 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{plugindir}}
 mv $RPM_BUILD_ROOT{%{_bindir},%{plugindir}}/%{plugin}
-cp -a %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/%{plugin}.cfg
+sed -e 's,@plugindir@,%{plugindir},' %{SOURCE1} > $RPM_BUILD_ROOT%{_sysconfdir}/%{plugin}.cfg
 
 rm -f $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Nagios/Plugins/Memcached/.packlist
 
