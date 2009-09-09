@@ -66,3 +66,26 @@
  abstract('Nagios plugin to observe memcached');
  license('perl');
  
+--- Nagios-Plugins-Memcached-0.02/MANIFEST~	2007-12-11 10:11:51.000000000 +0200
++++ Nagios-Plugins-Memcached-0.02/MANIFEST	2009-09-09 08:43:17.744661537 +0300
+@@ -19,7 +19,7 @@
+ inc/Test/Builder.pm
+ inc/Test/Builder/Module.pm
+ inc/Test/More.pm
+-lib/Nagios/Plugins/Memcached.pm
++lib/Nagios/Plugin/Memcached.pm
+ Makefile.PL
+ MANIFEST			This list of files
+ MANIFEST.SKIP
+--- Nagios-Plugins-Memcached-0.02/t/00-load.t~	2007-07-17 12:40:23.000000000 +0300
++++ Nagios-Plugins-Memcached-0.02/t/00-load.t	2009-09-09 08:44:32.629753396 +0300
+@@ -1,7 +1,7 @@
+ use Test::More tests => 1;
+ 
+ BEGIN {
+-    use_ok('Nagios::Plugins::Memcached');
++    use_ok('Nagios::Plugin::Memcached');
+ }
+ 
+-diag( "Testing Nagios::Plugins::Memcached $Nagios::Plugins::Memcached::VERSION" );
++diag( "Testing Nagios::Plugin::Memcached $Nagios::Plugin::Memcached::VERSION" );
