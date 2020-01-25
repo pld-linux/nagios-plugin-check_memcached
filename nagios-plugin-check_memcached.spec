@@ -4,7 +4,6 @@
 %bcond_without	tests	# do not perform "make test"
 #
 %define		plugin	check_memcached
-%include	/usr/lib/rpm/macros.perl
 Summary:	Nagios plugin to observe memcached
 Name:		nagios-plugin-%{plugin}
 Version:	0.02
